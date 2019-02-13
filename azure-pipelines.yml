@@ -14,10 +14,8 @@ jobs:
 - job: Scan
   pool:
     vmImage: 'Ubuntu-16.04'
-  container: anchore/engine-cli:latest
   dependsOn: Build
   steps:
   - script: |
-      echo "Adding image to Anchore engine"
-      anchore-cli image add
-  displayName: 'Scan image with Anchore'
+      docker run -it anchore/engine-cli
+    displayName: 'Scan image with Anchore'
