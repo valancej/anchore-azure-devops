@@ -7,3 +7,6 @@ pool:
 steps:
 - script: docker build -t jvalance/node_critical_fail .
   displayName: 'Build Docker image'
+
+- script: docker push jvalance/node_critical_fail
+  displayName: 'Push Docker image'
