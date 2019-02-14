@@ -15,5 +15,6 @@ jobs:
   dependsOn: Build
   steps:
   - script: |
-      docker run anchore/engine-cli anchore-cli
+      docker run -i anchore/engine-cli
+      anchore-cli
     displayName: 'Scan image with Anchore'
