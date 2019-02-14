@@ -10,5 +10,6 @@ steps:
     sudo pip install --upgrade pip
     sudo pip install --upgrade setuptools
     sudo pip install anchorecli
+    anchore-cli
     docker login -u $(dockerhubUser) -p $(dockerhubPass)
   displayName: 'Build and push Docker image'
