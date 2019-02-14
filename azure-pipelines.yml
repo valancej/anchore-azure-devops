@@ -8,6 +8,7 @@ pool:
 steps:
 - script: |
     sudo pip install --upgrade pip
-    pip install anchorecli
+    sudo pip install --upgrade setuptools
+    sudo pip install anchorecli
     docker login -u $(dockerhubUser) -p $(dockerhubPass)
   displayName: 'Build and push Docker image'
