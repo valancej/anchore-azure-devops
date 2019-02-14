@@ -1,15 +1,20 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'Ubuntu-16.04'
-
-
-steps:
-- script: |
-    sudo pip install --upgrade pip
-    sudo pip install --upgrade setuptools
-    sudo pip install anchorecli
-    anchore-cli
-    docker login -u $(dockerhubUser) -p $(dockerhubPass)
-  displayName: 'Build and push Docker image'
+jobs:
+- job: Build
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  steps:
+  - script: |
+      docker login -u $(dockerhubUser) -p $(dockerhubPass)
+    displayName: 'Build and push Docker image'
+- job: Scan
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  dependsOn: Build
+  steps:
+  - bash:
+      docker run -it anchore/engine-cli
+      anchore-cli
+    displayName: 'Scan image with Anchore'
