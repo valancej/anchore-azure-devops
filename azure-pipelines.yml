@@ -2,6 +2,13 @@ trigger:
 - master
 
 jobs:
+- job: Build
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  steps:
+  - script: | 
+      docker login -u $(dockerhubUser) -p $(dockerhubPass)
+    displayName: 'Build and push Docker image'
 - job: Scan
   pool:
     vmImage: 'Ubuntu-16.04'
