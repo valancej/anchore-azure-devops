@@ -6,6 +6,7 @@ pool:
 
 steps:
 - script: |
+    apt-get install python-pip
     pip install anchorecli
     docker login -u $(dockerhubUser) -p $(dockerhubPass)
   displayName: 'Build and push Docker image'
