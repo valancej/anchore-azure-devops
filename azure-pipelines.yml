@@ -1,20 +1,11 @@
 trigger:
 - master
 
-jobs:
-- job: Build
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  steps:
-  - script: | 
-      docker login -u $(dockerhubUser) -p $(dockerhubPass)
-    displayName: 'Build and push Docker image'
-- job: Scan
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  dependsOn: Build
-  steps:
-  - script: |
-      docker run -i anchore/engine-cli
-      anchore-cli
-    displayName: 'Scan image with Anchore'
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- script: |
+    pip install anchorecli
+    docker login -u $(dockerhubUser) -p $(dockerhubPass)
+  displayName: 'Build and push Docker image'
