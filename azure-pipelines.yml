@@ -2,15 +2,6 @@ trigger:
 - master
 
 jobs:
-- job: Build
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  steps:
-  - script: | 
-      docker login -u $(dockerhubUser) -p $(dockerhubPass)
-      docker build -t jvalance/node_critical_fail .
-      docker push jvalance/node_critical_fail
-    displayName: 'Build and push Docker image'
 - job: Scan
   pool:
     vmImage: 'Ubuntu-16.04'
